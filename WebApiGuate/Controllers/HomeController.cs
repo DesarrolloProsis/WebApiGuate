@@ -11,8 +11,8 @@ namespace WebApiGuate.Controllers
     public class HomeController : Controller
     {
         GTDBEntities db = new GTDBEntities();
-        public static DateTime HistoricoListas { get; set; }
-        public static DateTime HistoricoTags { get; set; }
+        public static string HistoricoListas { get; set; }
+        public static string HistoricoTags { get; set; }
         public static int OracleTransactions { get; set; }
         public static int SQLTransactions { get; set; }
         public ActionResult Index()
@@ -23,17 +23,17 @@ namespace WebApiGuate.Controllers
         }
         public void GetHistoricoListas()
         {
-            HistoricoListas = db.HistoricoListas.OrderByDescending(x => x.Fecha_Creacion).FirstOrDefault().Fecha_Creacion;
+            HistoricoListas = db.HistoricoListas.OrderByDescending(x => x.Fecha_Creacion).FirstOrDefault().Fecha_Creacion.ToString("dd/MM/yyyy HH:mm:ss");
         }
-        public DateTime SendHistoricoListas()
+        public string SendHistoricoListas()
         {
             return HistoricoListas;
         }
         public void GetHistoricoTags()
         {
-            HistoricoTags = db.Historico.OrderByDescending(x => x.Fecha).FirstOrDefault().Fecha;
+            HistoricoTags = db.Historico.OrderByDescending(x => x.Fecha).FirstOrDefault().Fecha.ToString("dd/MM/yyyy HH:mm:ss");
         }
-        public DateTime SendHistoricoTags()
+        public string SendHistoricoTags()
         {
             return HistoricoTags;
         }
